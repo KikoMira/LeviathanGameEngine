@@ -1,0 +1,274 @@
+TODO: update these
+
+cppppppp
+
+// ------------------ aaaa ------------------ //
+
+---------------------------------------------------------------------------
+// ------------------------------------ //
+#include "FILEREPLACENAME.h"
+using namespace Leviathan;
+// ------------------------------------ //
+
+// ------------------------------------ //
+
+// ------------------------------------ //
+
+// ------------------------------------ //
+
+// ------------------------------------ //
+
+
+------------------------------------------------------------------------
+hddddd
+
+------------------------------------------------------------------------
+#pragma once
+// ------------------------------------ //
+#include "Define.h"
+// ------------------------------------ //
+
+namespace Leviathan{
+
+	class FILEREPLACENAME{
+	public:
+		DLLEXPORT FILEREPLACENAME();
+        DLLEXPORT ~FILEREPLACENAME();
+
+	};
+}
+
+// --------------------------------------------------------------------------- GUI
+
+cppppppp
+
+---------------------------------------------------------------------------
+#include "Include.h"
+// ------------------------------------ //
+#ifndef LEVIATHAN_FILEREPLACENAME
+#include "FILEREPLACENAME.h"
+#endif
+using namespace Leviathan;
+using namespace Leviathan::GUI;
+// ------------------------------------ //
+
+// ------------------------------------ //
+
+// ------------------------------------ //
+
+// ------------------------------------ //
+
+// ------------------------------------ //
+
+
+------------------------------------------------------------------------
+hddddd
+
+------------------------------------------------------------------------
+#pragma once
+#ifndef LEVIATHAN_FILEREPLACENAME
+#define LEVIATHAN_FILEREPLACENAME
+// ------------------------------------ //
+#ifndef LEVIATHAN_DEFINE
+#include "Define.h"
+#endif
+// ------------------------------------ //
+// ---- includes ---- //
+
+
+namespace Leviathan{ namespace GUI{
+
+	class FILEREPLACENAME : public Object{
+	public:
+		DLLEXPORT FILEREPLACENAME();
+        DLLEXPORT ~FILEREPLACENAME();
+
+
+	private:
+
+	};
+
+}}
+#endif
+
+// --------------------------------------------------------------------------- RENDERING
+cppppppp
+
+---------------------------------------------------------------------------
+#include "Include.h"
+// ------------------------------------ //
+#ifndef LEVIATHAN_FILEREPLACENAME
+#include "FILEREPLACENAME.h"
+#endif
+using namespace Leviathan;
+using namespace Leviathan::Rendering;
+// ------------------------------------ //
+
+// ------------------------------------ //
+
+// ------------------------------------ //
+
+// ------------------------------------ //
+
+// ------------------------------------ //
+
+
+------------------------------------------------------------------------
+hddddd
+
+------------------------------------------------------------------------
+#pragma once
+#ifndef LEVIATHAN_FILEREPLACENAME
+#define LEVIATHAN_FILEREPLACENAME
+// ------------------------------------ //
+#ifndef LEVIATHAN_DEFINE
+#include "Define.h"
+#endif
+// ------------------------------------ //
+// ---- includes ---- //
+
+
+namespace Leviathan{ namespace Rendering{
+
+	class FILEREPLACENAME : public Object{
+	public:
+		DLLEXPORT FILEREPLACENAME();
+        DLLEXPORT ~FILEREPLACENAME();
+
+
+	private:
+
+	};
+
+}}
+#endif
+
+
+// --------------------------------------------------------------------------- OBJECT
+
+cppppppp
+
+---------------------------------------------------------------------------
+#include "Include.h"
+// ------------------------------------ //
+#ifndef LEVIATHAN_FILEREPLACENAME
+#include "FILEREPLACENAME.h"
+#endif
+using namespace Leviathan;
+using namespace Leviathan::GameObject;
+// ------------------------------------ //
+
+// ------------------------------------ //
+
+// ------------------------------------ //
+
+// ------------------------------------ //
+
+// ------------------------------------ //
+
+
+------------------------------------------------------------------------
+hddddd
+
+------------------------------------------------------------------------
+#pragma once
+#ifndef LEVIATHAN_FILEREPLACENAME
+#define LEVIATHAN_FILEREPLACENAME
+// ------------------------------------ //
+#ifndef LEVIATHAN_DEFINE
+#include "Define.h"
+#endif
+// ------------------------------------ //
+// ---- includes ---- //
+#include "BaseObject.h"
+
+namespace Leviathan{ namespace GameObject{
+
+	class FILEREPLACENAME : public BaseObject{
+	public:
+		DLLEXPORT FILEREPLACENAME();
+        DLLEXPORT ~FILEREPLACENAME();
+
+
+	private:
+
+	};
+
+}}
+#endif
+
+// ------------------------------------------------------------------------------------------------------------------ GAME ----------
+cppppppp
+
+---------------------------------------------------------------------------
+// ------------------------------------ //
+#ifndef SANDBOXIE_FILEREPLACENAME
+#include "FILEREPLACENAME.h"
+#endif
+//using namespace Leviathan;
+using namespace SandBoxie;
+// ------------------------------------ //
+FILEREPLACENAME::FILEREPLACENAME(){
+
+}
+FILEREPLACENAME::~FILEREPLACENAME(){
+
+}
+// ------------------------------------ //
+
+// ------------------------------------ //
+
+// ------------------------------------ //
+
+// ------------------------------------ //
+
+
+------------------------------------------------------------------------
+hddddd
+
+------------------------------------------------------------------------
+#pragma once
+#ifndef SANDBOXIE_FILEREPLACENAME
+#define SANDBOXIE_FILEREPLACENAME
+// ------------------------------------ //
+#ifndef SANDBOXIE_INCLUDE
+#include "Define.h"
+#endif
+// ------------------------------------ //
+// ---- includes ---- //
+
+
+namespace SandBoxie{
+
+	class FILEREPLACENAME : public Leviathan::Object{
+	public:
+		FILEREPLACENAME();
+        ~FILEREPLACENAME();
+
+
+	private:
+
+	};
+
+}
+// ------------------------------------ //
+
+#endif
+
+
+DLLEXPORT bool ::SendCustomMessage(int entitycustommessagetype, void* dataptr){
+	// First check if it is a request //
+	if(entitycustommessagetype == ENTITYCUSTOMMESSAGETYPE_DATAREQUEST){
+		// Check through components //
+        ObjectDataRequest* tmprequest = reinterpret_cast<ObjectDataRequest*>(dataptr);
+
+		return false;
+	}
+
+	// Check through components //
+
+
+	// This specific //
+
+	return false;
+}

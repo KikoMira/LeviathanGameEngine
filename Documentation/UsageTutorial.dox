@@ -1,0 +1,412 @@
+/*! \page tutorials Tutorials
+    \tableofcontents
+    \section gettingstartedsection Getting started
+    See first: \subpage prerequisites and \subpage compiling_leviathan.
+    
+    Then you can move on to the tutorials.
+    \note It is recommended that you work through the tutorials in order.
+    
+    \subsection beginnertutorials Beginner tutorials
+    \subpage tutorial0
+
+
+    \subpage tutorial1
+
+    \subsection tutorials_link_toscripts Information about scripting
+
+    \ref angelscript_main
+    
+*/
+
+/*! \page tutorial0 Running the samples
+
+\section tutorial0_linux On Linux
+
+First go to the `build` folder and make sure everything is compiled by
+running `cmake .. && make -j numberofcores`. If that succeeds you can
+go to `build/bin` folder and run `./Pong` to run the sample pong
+game. You can run tests with make like this (make sure to be in the
+`build` folder): `cmake .. && make check -j numberofcores`.
+
+\section tutorial0_windows On Windows
+
+Start by opening `build/Leviathan.sln`. Then make sure you have
+selected `RelWithDebInfo` as the active configuration (and make sure
+arch is `x64`) in visual studio and then to run the Pong sample right
+click the project and set as startup project then press the green
+arrow in "Local Windows Debugger" or press F5. You can also run
+LeviathanTest like this to verify that individual tests of the engine
+run correctly.
+
+\see \ref tutorial1
+
+*/
+
+/*! \page tutorial1 Getting started tutorial
+
+
+    \section tutorial1recompiling Recompiling
+
+    To save time you shouldn't run the setup script every time you
+    have made changes. Instead on linux you should run `make -j
+    numberofcores` in `project/build` folder and on Windows compile
+    from visual studio.
+
+    <b>Important</b>: when updating the scripts or assets of a game
+    you must re-run cmake to make it copy the changed assets to the
+    game binary folder. On Windows you should have cmd.exe (or
+    powershell) open in the folder that has the solution file and run
+    `cmake ..` in that when you change the assets (visual studio may
+    ask you to reload the project you have open after running
+    cmake. You should always reload the solution when asked). On linux
+    you should combine the cmake command to make (it shouldn't do
+    anything if nothing has changed) so in the build folder compile
+    and run like this:
+    \code{sh}
+    cmake .. && make -j numberofcores && (cd bin && ./GameName)
+    \endcode
+
+    \section tutorial1setup Setup a new project using Leviathan
+    \todo Create tutorials
+
+*/
+
+/*! \page prerequisites Prerequisites
+    
+\section prerequisite_software Required Software
+
+\subsection prerequisite_software_common Common
+
+These programs are needed for all platforms:
+
+- [Ruby](http://ruby-lang.org) (It is recommended to use RubyInstaller on Windows, version 2.4 or newer)
+
+- Ruby gems (check below for details)
+
+- git
+
+- git lfs
+
+- svn
+
+- mercurial
+
+- cmake
+
+- boost libraries 1.66 or newer is required on windows older versions
+  work on linux. (On **linux** the setup script will automatically use
+  the package manager to install this. For **Windows** see \ref
+  prerequisite_software_windows)
+
+- 7zip
+
+- Vulkan SDK (On **linux** the setup script will automatically use the
+  package manager to install this)
+
+You can check whether a program is in PATH by opening a command 
+prompt/terminal and running the program by typing its name. 
+For example `ruby -v` this shouldn't print an error instead you should get something like this:
+\code{sh}
+ruby 2.4.1p111
+\endcode
+
+\subsection prerequisite_software_windows Windows
+
+- Visual Studio 2017 Community (make sure to enable c++ support when installing) and install
+  to the default path in `C:/Program Files (x86)/Microsoft Visual Studio/2017/Community`
+  otherwise the setup won't find it.
+- Visual c++ 2010 runtime (This is required for yasm according to ffmpeg setup guide)
+- Visual c++ 2015 runtime (CEF uses this, users also need this)
+- [Cygwin64](https://cygwin.com/install.html). When Cygwin asks for
+  which packages to install make sure the at least the following are
+  selected (and to save space don't install the debug variants):
+  
+  - coreutils
+  - make
+  - bash
+  - tar (with gzip support)
+ 
+  You can also optionally install git with cygwin. But cmake has to be
+  the Windows version, otherwise it won't properly generate visual
+  studio project files. Also subversion and mercurial has to be the
+  Windows versions. I used SlickSVN and TortoiseHG. TortoiseSVN should
+  also work if you select the option to add svn to PATH while
+  installing it.
+  
+  Then add `C:\cygwin64\bin` to the system
+  path to make everything visible to the script
+
+  If you have issues with not getting everything installed you can
+  reference these images (that have additional packages installed, but
+  also all the required ones):
+  <a href="https://leviathanengine.com/images/setup_list_1.png">cygwin list 1</a>,
+  <a href="https://leviathanengine.com/images/setup_list_2.png">cygwin list 2</a>,
+  <a href="https://leviathanengine.com/images/setup_list_3.png">cygwin list 3</a>,
+  <a href="https://leviathanengine.com/images/setup_list_4.png">cygwin list 4</a>,
+  <a href="https://leviathanengine.com/images/setup_list_5.png">cygwin list 5</a>.
+
+  Additionally if you have a lot of entires in your system path there
+  may be conflicting names with executables from cygwin. This results
+  in weird errors during ffmpeg compilation with the install
+  etc. commands not accepting the parameters they are given. This can
+  be fixed in two ways: either delete the conflicting programs OR make
+  cygwin be the first thing in your path to let it override other
+  programs if they have the same name.
+
+
+- After compiling Boost make sure to set an environment variable
+  `BOOST_ROOT` to the folder where you compiled boost (for example
+  `C:\projects\boost`). This is different from path, you can create
+  new environment variables from the same place where you edit the
+  PATH environment variable. And compile shared versions and use 64
+  bit build.
+
+  Additional tip: when running `b2` make sure you specify the toolset,
+  bitness, type and the number of cores to use for compiling like
+  this:
+
+  `.\b2 --toolset=msvc link=shared,static address-model=64 --with-system --with-filesystem --with-program_options -j numberofcores`.
+  Note: replace numberofcores with how many cores you
+  have for optimal compilation time. Also if you plan on using boost
+  with other projects as well remove the `--with-` options to compile
+  all of the components, which takes a long time.
+
+  If msvc isn't detected correctly, open "Developer Command Prompt for
+  Visual Studio 2017" and run again in that. Just make sure to use the
+  64 bit version and with that you might have to add
+  `architecture=x86` as an extra parameter to b2 for it to build
+  correctly. That should make boost detect visual studio.
+
+  <a
+  href="http://www.boost.org/doc/libs/1_66_0/more/getting_started/windows.html#prepare-to-use-a-boost-library-binary">official
+  boost guide</a>
+
+- Vulkan SDK (use the [installer](https://vulkan.lunarg.com/sdk/home))
+  After installing you need to setup an environment variable called
+  `VULKAN_SDK` pointing to the install path (for example: `C:\VulkanSDK\1.1.108.0`)
+
+- 7zip. Download the <a
+  href="http://www.7-zip.org/download.html">official</a> installer
+  release and then once installed add the installed folder (where
+  `7z.exe` is) to path. Confirm by running `7z.exe` in cmd.exe or
+  powershell, it should print 7zip version info and command line
+  usage.
+
+- https://github.com/git-lfs/git-lfs/wiki/Installation Note: this is
+  untested whether this works when git is installed with
+  Cygwin. Please report if this works or doesn't for you. After
+  installing remember to run `git lfs install`
+
+\subsection prerequisite_software_linux Linux
+
+- lsb_release
+
+- GCC 7+ or clang 5+ (clang is untested, but probably works...)
+
+- 7zip. Use your package manager to install, it is probably named `p7zip`.
+
+- Git lfs is likely available as a package named (git-lfs). If it is
+  not install it manually. After installing remember to run `git lfs
+  install`
+
+\subsection prerequisite_software_gems Ruby Gems
+
+- os
+- colorize
+- rubyzip
+- json
+- sha3
+
+These can be installed by running `gem install os colorize
+rubyzip json sha3`. Running with sudo is probably not required. If you get
+errors installing the gems you should try updating your ruby version.
+
+If you have trouble installing sha3 on windows: make sure you have
+ruby 2.4 or newer installed with ruby installer for windows. Then run
+`ridk install` and try all of the options. The third option at least
+should reinstall all the ruby development tools, including gmp, which
+is needed for sha3. After that your ruby native extension build tools
+should be installed and the gem installation should work.
+
+If it still doesn't work run `ridk exec pacman -S gmp-devel` and then
+run `ridk install` again.
+
+If you are a developer and want to use the Breakpad symbol uploader
+you additionally need the gem `httparty`.
+
+\subsection prerequisite_what_next Next
+To compile Leviathan see \ref compiling_leviathan
+
+\subsection prerequisite_troubleshooting Troubleshooting
+
+\subsubsection prequisite_troubleshooting_require Require file not found
+
+Make sure you have installed all of the ruby gems.
+
+This is one of the potential errors (the 'os' here is the missing gem):
+
+```
+C:/Ruby24-x64/lib/ruby/2.4.0/rubygems/core_ext/kernel_require.rb:55:in `require`: cannot load such file -- os (LoadError)
+```
+
+\subsubsection prequisite_troubleshooting_boost Boost libraries not found
+
+On Windows you need to make sure that you have compiled the needed
+boost libraries on the exact same compiler version.
+
+For Visual Studio 2017 libraries with the suffix `-vc141-mt-gd-x64`
+needs to be in `boost/stage/lib` folder. Otherwise boost has not been
+correctly compiled.
+
+
+*/
+
+/*! \page compiling_leviathan Compiling Leviathan
+
+\note Before the latest setup script the prerequisites section described manual
+setup for all required libraries. But now that has been replaced with
+the automatic setup script. If you want to read the old version
+checkout an older commit of Leviathan,
+`bba062c07a952c170a16c5f9e2608896d3d09821` for example.
+
+Make sure you have installed \ref prerequisites first.
+
+\section compiling_clone Cloning Leviathan
+
+If you haven't used git to clone the Leviathan repository yet. Run
+this command to clone Leviathan to a new folder:
+\code{sh}
+git clone https://github.com/hhyyrylainen/Leviathan.git
+cd Leviathan
+git submodule init
+\endcode
+
+Windows tip: shift right-click in a folder and select "Open command
+prompt here" or "Open powershell here" to open a cmd window to the
+folder where you want to build Leviathan. If building fails you should
+try a path without a space in it.
+
+\section compiling_script Running Setup
+
+Now move to the Leviathan folder and run the setup script:
+\code{sh}
+cd Leviathan
+ruby Setup.rb
+\endcode
+
+If the script runs correctly you can move to the next
+section. Otherwise see \ref compile_troubleshooting.
+
+
+\section compile_done Done
+
+You can run tests on linux by running `make check -j numberofcores` in
+the build folder. And on Windows by running the LeviathanTest project
+in visual studio debugger. Note: when you open `build/Leviathan.sln` make sure
+you select `RelWithDebInfo` as the active configuration as the debug
+builds are known to be broken very often.
+
+For a tutorial on what to do next see \ref tutorial0.
+Now, if the samples runs correctly, you are all set to start your own project.
+
+\see \ref tutorials
+
+\section compile_troubleshooting Troubleshooting
+
+Here are some common fixes for issues you might have with the setup script.
+
+If none of these work please open an issue here: [Leviathan
+repository](https://github.com/hhyyrylainen/Leviathan/issues).
+
+\subsection troubleshooting_submodules Submodules out of date
+
+If you have pulled updates or changed branches your downloaded
+submodules might be out of date. To fix this run:
+
+\code{sh}
+cd Leviathan
+git submodule update
+\endcode
+
+
+\subsection troubleshooting_missing_pr Missing command `pr`
+
+If you get an error about `pr` being an unkown command or missing try
+installing Cygwin64 'coreutils' package. If that doesn't work either 
+install the default set of cygwin packages.
+
+\subsection troubleshooting_ffmpeg_line_ends  Incorrect ffmpeg makefile line endings
+
+If you get an error "missing separator. Stop" in common.mak when
+trying to build ffmpeg on windows, this is probably caused by line
+endings being incorrect.
+
+To fix these change to the FFMPEG FOLDER and run these commands to fix the line endings:
+\code{sh}
+git config core.autocrlf false
+\endcode
+Delete all files except ".git" folder. And then:
+\code{sh}
+git checkout .
+\endcode
+
+Warning: this will discard all changes in the git repo this is ran in,
+so make sure you are in the right folder.
+
+
+It is also possible to globally change the autocrlf setting but that
+isn't recommended to avoid accidentally committing windows line
+endings.
+
+
+\subsection troubleshooting_ffmpeg Issues compiling ffmpeg
+
+First, make sure that you are using the standard Windows command
+prompt. Using a MinGW shell or equivalent is known to cause
+issues. You may need to delete the ffmpeg folder after this to make
+sure that there are no cached values or other things messing things
+up.
+
+
+Then make sure that nothing is overriding the programs in cygwin. You
+should start by making sure cygwin is the first thing in PATH. And
+then that the specific programs are from cygwin. This can be done by
+renaming the executables in cygwin/bin, for example renaming `awk.exe`
+or `make.exe` to `testawk.exe` and then verifying that the setup
+script starts complaining about missing that specific program. If it
+doesn't start complaining then this confirms that something is messing
+with your PATH and overriding the cygwin tools.  Either delete the
+offending things (MSYS, MinGW) or remove them from PATH (and make sure
+once again that you are using plain `cmd.exe` to run the setup and not
+some other shell).
+
+\subsubsection troubleshoothing_ffmpeg_more ffmpeg build is still failing
+
+For other ffmpeg building issues see these guides:
+[windows guide](https://trac.ffmpeg.org/wiki/CompilationGuide/MSVC),
+[all guides](https://trac.ffmpeg.org/wiki/CompilationGuide)
+
+
+\subsubsection troubleshoothing_no_files_found LeviathanTest or sample games don't find files
+
+Make sure you are running them in the correct directory
+(`build/bin`). On Windows check the debugging startup directory in
+Visual Studio project settings.
+
+\section compile_manually Manually Compiling
+
+This is very much not recommended as the dependencies need to be built
+with complex options and additional dependencies. Then the resulting
+files need to be installed into `Leviathan/build/ThirdParty`. Then
+running the main cmake configure should succeed and you can try
+building. You will still need ruby for generating some C++ files so
+you can't skip the ruby dependency even with trying to build manually.
+
+For a good starting point see the note at the top of this page about older setup
+instructions.
+
+The old instructions will most likely not work anymore but provide a
+good starting point for building some of the Leviathan dependencies.
+
+
+*/
