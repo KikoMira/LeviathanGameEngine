@@ -1,4 +1,3 @@
-// (c) Henri Hyyryläinen 2015-2016
 #pragma once
 #include "Include.h"
 #include <string>

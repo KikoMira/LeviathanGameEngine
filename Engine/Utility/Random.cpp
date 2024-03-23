@@ -5,7 +5,6 @@
     file path:	Engine
     file base:	Random
     file ext:	cpp
-    author:		Henri Hyyryläinen
 
     purpose:	Platform independent random number generator, based on implementation of
 Mersenne twister. Code written based on pseudocode on

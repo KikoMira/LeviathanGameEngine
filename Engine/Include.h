@@ -1,5 +1,3 @@
-// Leviathan Game Engine
-// Copyright (c) 2012-2019 Henri Hyyryläinen
 #pragma once
 //
 // File configured by CMake do not edit Include.h //
