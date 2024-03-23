@@ -72,38 +72,16 @@ option(USE_LEAP "Set to on when using Leap motion, will auto disable if files ar
 # Builds Leviathan as an utility library
 option(LEVIATHAN_AS_LIBRARY "Builds standalone compatible Leviathan parts only" OFF)
 
-# Build configuration
-# TODO: this still needs a lot of work, LEVIATHAN_USING_DEPENDENCIES is basically now used
-# to switch between Leviathan library and full engine
+set(CMAKE_INSTALL_PREFIX "./Install")
 
-if(ONLY_DOCUMENTATION OR LEVIATHAN_AS_LIBRARY)
-
-  set(MAKE_RELEASE OFF)
-  set(LEVIATHAN_USING_ANGELSCRIPT OFF)
-  # set(LEVIATHAN_USING_BOOST OFF)
-  set(LEVIATHAN_USING_OGRE OFF)
-  set(LEVIATHAN_USING_BULLET OFF)
-  set(LEVIATHAN_USING_CEF OFF)
-  set(LEVIATHAN_USING_GUI OFF)
-  set(LEVIATHAN_USING_SFML OFF)
-  set(LEVIATHAN_USING_SDL2 OFF)
-  set(LEVIATHAN_USING_LEAP OFF)
-
-  set(BUILD_SAMPLES OFF)
-    
-else()
-  set(CMAKE_INSTALL_PREFIX "./Install")
-
-  set(LEVIATHAN_USING_ANGELSCRIPT ${USE_ANGELSCRIPT})
-  # set(LEVIATHAN_USING_BOOST ${USE_BOOST})
-  set(LEVIATHAN_USING_OGRE ${USE_OGRE})
-  set(LEVIATHAN_USING_BULLET ${USE_BULLET})
-  set(LEVIATHAN_USING_CEF ${USE_CEF})
-  set(LEVIATHAN_USING_GUI ${USE_GUI})
-  set(LEVIATHAN_USING_SFML ${USE_SFML})
-  set(LEVIATHAN_USING_SDL2 ${USE_SDL2})
-  set(LEVIATHAN_USING_LEAP ${USE_LEAP})
-endif()
+set(LEVIATHAN_USING_ANGELSCRIPT ${USE_ANGELSCRIPT})
+set(LEVIATHAN_USING_OGRE ${USE_OGRE})
+set(LEVIATHAN_USING_BULLET ${USE_BULLET})
+set(LEVIATHAN_USING_CEF ${USE_CEF})
+set(LEVIATHAN_USING_GUI ${USE_GUI})
+set(LEVIATHAN_USING_SFML ${USE_SFML})
+set(LEVIATHAN_USING_SDL2 ${USE_SDL2})
+set(LEVIATHAN_USING_LEAP ${USE_LEAP})
 
 # Configuration checks
 if(LEVIATHAN_USING_OGRE AND NOT LEVIATHAN_USING_SDL2)
@@ -131,7 +109,6 @@ include(LeviathanCompileOptions)
 include(LeviathanSetRPath)
 
 if(NOT ONLY_DOCUMENTATION)
-  # Find required libraries
   include(LeviathanFindLibraries)
 endif()
 
