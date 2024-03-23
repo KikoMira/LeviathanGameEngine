@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-// Modified by Henri Hyyryläinen (2014) //
+// Modified by KikoMira (2024) //
 
 #include <stdio.h>
 

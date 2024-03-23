@@ -1,3 +1,6 @@
+
+// Modified by KikoMira (2024) //
+
 #pragma once
 #include "Define.h"
 // ------------------------------------ //
