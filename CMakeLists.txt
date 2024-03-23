@@ -46,12 +46,10 @@ option(DOCUMENTATION_LOCAL "Set to OFF to create web documentation" ON)
 option(BUILD_SAMPLES "Set to OFF to disable building demo programs" ON)
 option(BUILD_TESTS "Set to OFF to disable building tests" ON)
 
-
-
 # Option for only building the documentation (for lighter jenkins)
-option(ONLY_DOCUMENTATION "If true only documentation can be built correctly" OFF)
+option(ONLY_DOCUMENTATION "If true only documentation can be built correctly" ON)
 
-option(MAKE_RELEASE "Enabled breakpad crash reporting and some game specific options" OFF)
+option(MAKE_RELEASE "Enabled breakpad crash reporting and some game specific options" ON)
 
 option(LEVIATHAN_USE_ACTUAL_OBJECT_POOLS
   "Set to false to use new/delete instead of object pools. Provided for debugging memory issues with valgrind" ON)
@@ -187,6 +185,7 @@ if(ONLY_DOCUMENTATION)
   
   # engine project 
   add_subdirectory(Engine)
+  add_subdirectory(Editor)
   
   # test project
   if(BUILD_TESTS)
@@ -195,12 +194,6 @@ if(ONLY_DOCUMENTATION)
     # Set the tests as the default startup project
     set_property(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}" PROPERTY
       VS_STARTUP_PROJECT LeviathanTest)
-  endif()
-  
-  if(LEVIATHAN_USING_DEPENDENCIES)
-
-    # Standalone editor
-    add_subdirectory(Editor)
   endif()
 
   if(BUILD_SAMPLES)
